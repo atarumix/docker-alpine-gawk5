@@ -1,7 +1,7 @@
-FROM frolvlad/alpine-gcc
+FROM alpine:3.8
 MAINTAINER atarumix
 WORKDIR /tmp
-RUN apk add --no-cache make && wget http://ftp.gnu.org/gnu/gawk/gawk-5.0.0.tar.xz && tar xJvf gawk-5.0.0.tar.xz && rm gawk-5.0.0.tar.xz
+RUN apk add --no-cache gcc make musl-dev && wget http://ftp.gnu.org/gnu/gawk/gawk-5.0.0.tar.xz && tar xJvf gawk-5.0.0.tar.xz && rm gawk-5.0.0.tar.xz
 WORKDIR /tmp/gawk-5.0.0
 RUN ./configure && make && strip gawk
 

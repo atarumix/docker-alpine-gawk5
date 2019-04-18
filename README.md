@@ -8,4 +8,3 @@ du -m /usr|docker run --rm -i atarumix/gawk5-alpine 'BEGIN{FS="/"}NF<4{print}' #
 docker run --rm -v $(pwd):/src atarumix/gawk5-alpine -f [SOME_AWK_SCRIPT] # current directory in the container is set to "/src".
 ```
 
-Using [frolvlad/alpine-gcc](https://hub.docker.com/r/frolvlad/alpine-gcc) for multistage build.
