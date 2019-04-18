@@ -3,7 +3,7 @@ MAINTAINER atarumix
 WORKDIR /tmp
 RUN apk add --no-cache gcc make musl-dev && wget http://ftp.gnu.org/gnu/gawk/gawk-5.0.0.tar.xz && tar xJvf gawk-5.0.0.tar.xz && rm gawk-5.0.0.tar.xz
 WORKDIR /tmp/gawk-5.0.0
-RUN ./configure && make && strip gawk
+RUN if [ -f '/proc/cpuinfo' ]; then CPUNUM=`grep -c ^processor /proc/cpuinfo`;CPUNUM=`expr 1 + $CPUNUM` ;else CPUNUM=1; fi ;  ./configure && make -j$CPUNUM && strip gawk
 
 FROM alpine:3.6
 MAINTAINER atarumix
