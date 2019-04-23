@@ -7,8 +7,9 @@ RUN if [ -f '/proc/cpuinfo' ]; then CPUNUM=`grep -c ^processor /proc/cpuinfo`;CP
 
 FROM alpine:3.6
 MAINTAINER atarumix
+RUN mkdir /src && mkdir /usr/local/lib/gawk
 COPY --from=0 /tmp/gawk-5.0.0/gawk /usr/local/bin/gawk5
-RUN mkdir /src
+COPY --from=0 /tmp/gawk-5.0.0/extension/.libs/*.so /usr/local/lib/gawk/
 WORKDIR /src
 ENTRYPOINT ["/usr/local/bin/gawk5"]
 CMD ["--help"]
